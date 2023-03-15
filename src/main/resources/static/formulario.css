@@ -1,0 +1,27 @@
+div.container{
+    margin-top: 40px;
+    
+}
+
+div.container button{
+    
+    margin-top:30px;
+    
+}
+
+div.container label{
+    font-weight: bold;
+    color:menutext;
+}
+
+#exito{
+    color:#0FC;
+    font-size:1.6em;
+}
+
+div.container form footer{
+    color:#F00;
+    
+}
+
+

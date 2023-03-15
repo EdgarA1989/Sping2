@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="/fragments/head :: head"></head>
+    <body>
+        <article>
+
+            <!-- FOMULARIO USUARIO -->
+            <div class="container col-sm-12 col-lg-10 col-xl-6 col-xxl-6">
+
+                <h1>Registro de usuario </h1>
+                <form th:action="@{/registro}" method="POST" enctype="multipart/form-data">  <!-- INDICO LA ACCION QUE VA A IR A LA URL SOBRE LAS BARRAS Y COLOCO EL METOO UTILIZADO POST EN ESTE CASO-->
+                    <label>Nombre de Usuario</label>
+                    <input type="text" class="form-control" name="nombre" th:value="${nombre}">
+                    
+                    <label>Cargar Imagen</label>
+                    <div>
+                       <input type="file" class="form-control" name="archivo"> 
+                    </div>
+                    
+                    <label>Contraseña</label>
+                    <input type="password" class="form-control" name="password" th:value="${password}">
+                    <label>Repetir Contraseña</label>
+                    <input type="password" class="form-control" name="password1" th:value="${password1}">
+                    
+                    
+                    
+                    <button type="submit" class="btn btn-info btn-block">Registrar</button>
+
+
+                    <a href="/" class="btn btn-secondary btn-block">Volver</a>
+
+
+                    <footer th:if="${exito != null}" th:text="${exito}" id="exito"></footer>
+                    <footer th:if="${error != null}" th:text="${error}"></footer>
+
+                </form>
+
+
+            </div>
+    </body>
+</html>

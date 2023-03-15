@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"> <!--Tengo que llamar a la seguridad tmb-->
+    <head>
+        <title>formulario noticia</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        
+        <!-- SCRIPT JS -->
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+        <!-- ESTILOS BOOTSTRAP -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <!-- ESTILOS CSS -->
+        <link rel="stylesheet" th:href="@{/indexestilo.css}">
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">NotiArgento</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/noticia/prenoticia">Ver noticia</a>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Administrador
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/noticia/admin">Noticiero</a>
+                                    <a class="dropdown-item" href="/administrador/usuarios" sec:authorize="hasRole('ADMIN')">Ver Periodistas</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Logout</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <article>
+            <div class="container col-sm-12 col-lg-10 col-xl-6 col-xxl-6">
+
+                <h1>Crear Noticia</h1>
+                <form action="/noticia/registro" method="POST"> <!-- INDICO LA ACCION QUE VA A IR A LA URL SOBRE LAS BARRAS Y COLOCO EL METOO UTILIZADO POST EN ESTE CASO-->
+                    <label>Titulo Noticia</label>
+                    <input type="text" class="form-control" name="titulo">
+                    <label>Descrpicion Noticia</label>
+                    <textarea type="text" class="form-control" name="descripcion"></textarea>
+                    <label>Cuerpo Noticia</label>
+                    <textarea type="text" class="form-control" name="cuerpo"></textarea>
+                    <button type="submit" class="btn btn-info btn-block">Ingresar</button>
+
+                    <footer th:if="${exito != null}" th:text="${exito}" id="exito"></footer>
+                    <footer th:if="${error != null}" th:text="${error}"></footer>
+                </form>
+
+
+            </div>
+
+            
+
+            <div>
+                <h2 sec:authorize="hasRole('ADMIN')">Modificar Noticia</h2>
+            </div>
+
+            <div class="container" id="rownoticias" sec:authorize="hasRole('ADMIN')">
+                <div class="row">
+                    <div th:each ="noticia : ${noticias}" class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 th:text="${noticia.titulo}" class="card-title"></h5>
+                            <p th:text="${noticia.descripcion}" class="card-text"></p>
+                            <a class="btn btn-primary" th:href="@{/noticia/modificar/__${noticia.id}__}">Modificar</a>
+                            <a class="btn btn-primary" th:href="@{/noticia/eliminar/__${noticia.id}__}">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </article>
+    </body>
+</html>

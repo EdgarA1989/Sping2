@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"> <!--Tengo que llamar a la seguridad tmb-->
+    <head th:replace = "/fragments/head :: head" </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">NotiArgento</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/noticia/prenoticia">Ver noticia</a>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Administrador
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/noticia/admin">Noticiero</a>
+                                    <a class="dropdown-item" href="/administrador/usuarios" sec:authorize="hasRole('ADMIN')">Ver Periodistas</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Logout</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <article>
+            <!-- FORMULARIO LIBRO MODIFICAR  -->
+
+            <div class="container">
+                <div class="row my-4">
+                    <div class="col-md-3 col-lg-3 col-xl-3"></div>
+                    <div class="col-md-6 col-lg-6 col-xl-6">
+                        <h3 class="titulo">Ingrese las modificaciones del Periodista</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-lg-3 col-xl-3"></div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 py-3">
+                        <form th:action="@{/administrador/modificar/__${periodista.id}__}" method="POST"> <!-- INDICO LA ACCION QUE VA A IR A LA URL SOBRE LAS BARRAS Y COLOCO EL METOO UTILIZADO POST EN ESTE CASO-->
+                            <label>ID</label>
+                            <input th:value="${periodista.id}"  type="number" class="form-control" name="id"  readonly>          
+                            <br>
+                            <label>Nombre</label>
+                            <input th:value="${periodista.nombre}" type="text" class="form-control" name="nombre"  readonly>
+                            <br>
+                            <label>Fecha Alta</label>
+                            <input th:value="${periodista.fechaalta}" type="date" class="form-control" name="fechaalta" readonly>
+                            <br>
+                            <label>Rol</label>
+                            <input th:value="${periodista.rol}" type="text" class="form-control" name="rol"   readonly>
+                            <br>
+                            <label>Activo</label>
+                            <br>
+                            <select class="form-select" name="activo">
+                                <option selected th:text="${periodista.activo}"></option>
+                                <option th:if="${periodista.activo == false}" value="true">true</option>
+                                <option th:if="${periodista.activo == true}" value="false">false</option>
+                            </select>
+                            <br>
+                            <br>
+                            <label>Sueldo</label>
+                            <input th:value="${periodista.sueldo}" type="number" class="form-control" name="sueldo" placeholder="Ingrese sueldo">
+                            <br>
+
+                            <button type="submit" class="btn btn-block btn-info">Actualizar</button>
+
+                            <footer th:if="${error != null}" th:text="${error}"></footer>
+                            <br>
+                        </form>
+                    </div>
+                </div>
+
+
+
+        </article>
+    </body>
+</html>

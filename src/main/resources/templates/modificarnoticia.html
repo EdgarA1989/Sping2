@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>formulario noticia</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- ESTILOS BOOTSTRAP -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+        <!-- SCRIPT JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <!-- ESTILOS CSS -->
+        <link rel="stylesheet" th:href="@{/formulario.css}">
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">NotiArgento</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/noticia/prenoticia">Ver noticia</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/noticia/admin">Administrador</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <article>
+            <div class="container col-sm-12 col-lg-10 col-xl-6 col-xxl-6">
+
+                <form th:action="@{/noticia/modificar/__${noticia.id}__}" method="POST"> <!-- INDICO LA ACCION QUE VA A IR A LA URL SOBRE LAS BARRAS Y COLOCO EL METOO UTILIZADO POST EN ESTE CASO-->
+
+
+                    <!--    DEBO COLOCARLO PARA TENER UN ID Y PODER ENVIARLO MEDIANTE EL POST, PARA QUE QUEDE REGISTRO EN LA PAGINA DEL ID  -->
+                    <input hidden th:value="${id}" name="id">
+                    <label>Titulo Noticia</label>
+                    <input th:value="${noticia.titulo}" type="text" class="form-control" name="titulo">
+                    <label>Descrpicion Noticia</label>
+                    <input th:field="${noticia.descripcion}" type="text" class="form-control" name="descripcion">
+                    <label>Cuerpo Noticia</label>
+                    <input th:value="${noticia.cuerpo}" type="text" class="form-control" name="cuerpo">
+                    <button type="submit" class="btn btn-info btn-block">Modificar</button>
+                    <footer th:if="${exito != null}" th:text="${exito}" id="exito"></footer>
+                    <footer th:if="${error != null}" th:text="${error}"></footer>
+                </form>
+            </div>
+
+
+        </article>
+    </body>
+</html>

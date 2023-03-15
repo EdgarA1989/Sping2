@@ -1,0 +1,80 @@
+
+
+h1{
+    padding-top: 10px;
+    font-size: 4em;
+    color:darkslategray;
+    text-align: center;
+    font-family: Arial;
+    font-weight: bold;
+}
+h2{
+    padding-top: 10px;
+    font-size: 3.4em;
+    color:darkslategray;
+    text-align: center;
+    font-family: Arial;
+    font-weight: bold;
+}
+
+h3{
+    padding-top: 10px;
+    font-size: 1.8em;
+    color:darkolivegreen;
+    text-align: center;
+    font-family: Arial;
+    font-weight: bold;
+    
+}
+
+#rownoticias{
+    padding-top: 40px;
+    padding-left: 100px;    
+}
+
+div.card{
+    margin: 10px 10px;
+}
+
+div.container{
+    margin-top: 40px;
+    margin-bottom: 70px;
+
+}
+
+div.container button{
+
+    margin-top:30px;
+
+}
+
+div.container a{
+    margin-top:30px;
+
+}
+
+div.container label{
+    font-weight: bold;
+    color:menutext;
+}
+
+#exito{
+    color:#0FC;
+    font-size:1.6em;
+}
+
+div.container form footer{
+    color:#F00;
+
+}
+
+hr{
+    border: 1px solid black;
+}
+
+select{
+    bdisplay:block;
+    background-color:darkgrey;
+    width:200px;
+    font-weight: bold;
+}
